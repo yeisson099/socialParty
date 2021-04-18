@@ -1,8 +1,9 @@
 const app = require('./app');
+var PORT = process.env.PORT || app.get('port')
 require('./database');
 async function main() {
-    await app.listen(app.get('port'));
-    console.log('server on port 8080 :)');
+    await app.listen(PORT);
+    console.log('server on port: '+ PORT);
 }
 
 main();
