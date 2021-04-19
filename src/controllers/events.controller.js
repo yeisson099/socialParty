@@ -1,48 +1,45 @@
-const clubsCtrl = {};
-const ClubModel = require('../models/Clubs.model');
+const eventsCtrl = {};
+const EventModel = require('../models/Events.model');
 
-clubsCtrl.getClubs = async (req, res) => {
-    const clubs = await ClubModel.find();
-    res.json(clubs);
+eventsCtrl.getEvents = async (req, res) => {
+    const events = await EventModel.find();
+    res.json(events);
 };
 
-clubsCtrl.getClub = async (req, res) => {
-    const club = await ClubModel.findById(req.params.id);
-    res.json(club);
+eventsCtrl.getEvent = async (req, res) => {
+    const Event = await EventModel.findById(req.params.id);
+    res.json(Event);
 };
 
-clubsCtrl.createClub = async (req, res) => {
-    const { name, desc, event, covid, state } = req.body;
-    const newClub = new ClubModel({
+eventsCtrl.createEvent = async (req, res) => {
+    const { name, desc, date_init, date_end } = req.body;
+    const newEvent = new EventModel({
         name,
         desc,
-        event,
-        covid,
-        state
+        date_init,
+        date_end
     });
-    console.log(req.body)
-    console.log(newClub)
-    const createClub = await newClub.save();
-    res.json(createClub);
+    const createEvent = await newEvent.save();
+    res.json(createEvent);
 };
 
-clubsCtrl.updateClub = async (req, res) => {
-    const { name, desc, event, covid, state } = req.body;
-    const updateClub = new ClubModel({
-        name,
-        desc,
-        event,
-        covid,
-        state
+eventsCtrl.updateEvent = async (req, res) => {
+    const { name, desc, date_init, date_end } = req.body;
+    const event = await EventModel.findOneAndUpdate(req.params.id, {
+        $set: {
+            name,
+            desc,
+            date_init,
+            date_end
+        }
     });
-    const club = await ClubModel.findOneAndUpdate(req.params.id, updateClub);
-    res.json(club);
+    res.json(event);
 };
 
-clubsCtrl.deleteClub = async (req, res) => {
-    const club = await ClubModel.findByIdAndDelete(req.params.id);
-    res.json(club);
+eventsCtrl.deleteEvent = async (req, res) => {
+    const Event = await EventModel.findByIdAndDelete(req.params.id);
+    res.json(Event);
 };
 
 
-module.exports = clubsCtrl;
+module.exports = eventsCtrl;

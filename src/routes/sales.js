@@ -2,15 +2,15 @@ const { Router } = require('express');
 const router = Router();
 
 //controllers
-const { getClubs,createClub,updateClub,deleteClub,getClub } = require('../controllers/sales.controller');
+const { getSales,createSale,updateSale,deleteSale,getSale } = require('../controllers/sales.controller');
 
 router.route('/')
-    .get(getClubs)
-    .post(createClub)
+    .get(getSales)
+    .post(createSale)
 
 router.route('/:id')
-    .get(getClub)
-    .put(updateClub)
-    .delete(deleteClub)
+    .get(getSale)
+    .put(updateSale)
+    .delete(deleteSale)
 
 module.exports = router;

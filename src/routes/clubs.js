@@ -10,7 +10,9 @@ const {
     getClub,
     addSale,
     removeSale,
-    getByName
+    getByName,
+    addEvent,
+    removeEvent
 } = require('../controllers/clubs.controller');
 
 //CRUD
@@ -24,12 +26,19 @@ router.route('/:id')
     .put(updateClub)
     .delete(deleteClub)
 
-//sales collection
+//Sales collection
 router.route('/assingSale/:id')
     .put(addSale)
 
 router.route('/removeSale/:id')
     .put(removeSale)
+
+//Events collection
+router.route('/assingEvent/:id')
+.put(addEvent)
+
+router.route('/removeEvent/:id')
+.put(removeEvent)
 
 //filters
 /* router.route('/getByType')

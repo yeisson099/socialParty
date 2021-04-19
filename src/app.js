@@ -20,10 +20,12 @@ app.use(passport.initialize());
 //routes
 const clubsRouter = require('./routes/clubs');
 const salesRouter = require('./routes/sales');
+const eventsRouter = require('./routes/events');
 
 // api
 app.use('/api/clubs', clubsRouter);
 app.use('/api/sales', salesRouter);
+app.use('/api/events', eventsRouter);
 
 /* app.get('/google', passport.authenticate('google', { scope: 'profile' }));
 app.get('/google/callback', passport.authenticate('google',

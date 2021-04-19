@@ -1,47 +1,47 @@
-const clubsCtrl = {};
+const SalesCtrl = {};
 const SalesModel = require('../models/Sales.model');
 
-clubsCtrl.getClubs = async (req, res) => {
-    const clubs = await SalesModel.find();
-    res.json(clubs);
+SalesCtrl.getSales = async (req, res) => {
+    const Sales = await SalesModel.find();
+    res.json(Sales);
 };
 
-clubsCtrl.getClub = async (req, res) => {
-    const club = await SalesModel.findById(req.params.id);
-    res.json(club);
+SalesCtrl.getSale = async (req, res) => {
+    const Sale = await SalesModel.findById(req.params.id);
+    res.json(Sale);
 };
 
-clubsCtrl.createClub = async (req, res) => {
+SalesCtrl.createSale = async (req, res) => {
     const { name, desc, date_init, date_end } = req.body;
-    const newClub = new SalesModel({
+    const newSale = new SalesModel({
         name,
         desc,
         date_init,
         date_end
     });
     console.log(req.body)
-    console.log(newClub)
-    const createClub = await newClub.save();
-    res.json(createClub);
+    console.log(newSale)
+    const createSale = await newSale.save();
+    res.json(createSale);
 };
 
-clubsCtrl.updateClub = async (req, res) => {
-    const { name, desc, event, covid, state } = req.body;
-    const updateClub = new SalesModel({
-        name,
-        desc,
-        event,
-        covid,
-        state
+SalesCtrl.updateSale = async (req, res) => {
+    const { name, desc, date_init, date_end } = req.body;
+    const sale = await SalesModel.findOneAndUpdate(req.params.id, {
+        $set: {
+            name,
+            desc,
+            date_init,
+            date_end
+        }
     });
-    const club = await SalesModel.findOneAndUpdate(req.params.id, updateClub);
-    res.json(club);
+    res.json(sale);
 };
 
-clubsCtrl.deleteClub = async (req, res) => {
-    const club = await SalesModel.findByIdAndDelete(req.params.id);
-    res.json(club);
+SalesCtrl.deleteSale = async (req, res) => {
+    const Sale = await SalesModel.findByIdAndDelete(req.params.id);
+    res.json(Sale);
 };
 
 
-module.exports = clubsCtrl;
+module.exports = SalesCtrl;

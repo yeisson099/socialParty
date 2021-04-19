@@ -6,7 +6,7 @@ const ClubModel = require('../models/Clubs.model');
 clubsCtrl.getClubs = async (req, res) => {
     const clubs = await ClubModel.find()
     res.json(clubs);
-};  
+};
 
 clubsCtrl.getClub = async (req, res) => {
     const club = await ClubModel.findById(req.params.id);
@@ -14,14 +14,13 @@ clubsCtrl.getClub = async (req, res) => {
 };
 
 clubsCtrl.createClub = async (req, res) => {
-    const { name, desc, event, covid, state,prueba } = req.body;
+    const { name, desc, type, covid, state } = req.body;
     const newClub = new ClubModel({
         name,
         desc,
-        event,
+        type,
         covid,
-        state,
-        prueba
+        state
     });
     console.log(req.body)
     console.log(newClub)
@@ -30,16 +29,17 @@ clubsCtrl.createClub = async (req, res) => {
 };
 
 clubsCtrl.updateClub = async (req, res) => {
-    const { name, desc, event, covid, state } = req.body;
-    const updateClub = new ClubModel({
-        name,
-        desc,
-        event,
-        covid,
-        state
+    const { name, desc, type, covid, state } = req.body;
+    const updateClub = await EventModel.findOneAndUpdate(req.params.id, {
+        $set: {
+            name,
+            desc,
+            type,
+            covid,
+            state
+        }
     });
-    const club = await ClubModel.findOneAndUpdate(req.params.id, updateClub);
-    res.json(club);
+    res.json(updateClub);
 };
 
 clubsCtrl.deleteClub = async (req, res) => {
@@ -68,20 +68,41 @@ clubsCtrl.removeSale = async (req, res) => {
     res.json(addSale);
 };
 
+//Events collection
+clubsCtrl.addEvent = async (req, res) => {
+    const { events } = req.body;
+    console.log(events)
+    console.log(req.params.id)
+    const addEvent = await ClubModel.findOneAndUpdate(req.params.id, {
+        $push: { events: events }
+    });
+    res.json(addEvent);
+};
+
+clubsCtrl.removeEvent = async (req, res) => {
+    const { events } = req.body;
+    console.log(events)
+    console.log(req.params.id)
+    const addEvent = await ClubModel.findOneAndUpdate(req.params.id, {
+        $pull: { events: events }
+    });
+    res.json(addEvent);
+}
+
 //filters
 clubsCtrl.getByType = async (req, res) => {
     const clubs = await ClubModel.find()
     res.json(clubs);
-};  
+};
 
 clubsCtrl.getByName = async (req, res) => {
-    const {name} = req.params;
+    const { name } = req.params;
     console.log(name)
     const clubs = await ClubModel.find({
         name
     });
     res.json(clubs);
-};  
+};
 
 
 

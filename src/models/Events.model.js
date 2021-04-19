@@ -25,4 +25,4 @@ const SaleSchema = new Schema({
     timestamps: true
 });
 
-module.exports = model('SALES', SaleSchema);
+module.exports = model('EVENTS', SaleSchema);
