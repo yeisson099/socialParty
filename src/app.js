@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const logger = require('morgan');
+const multer = require('multer');
+const path = require('path');
 const createError = require('http-errors');
 const passport = require('passport');
 
@@ -15,7 +17,11 @@ app.use(logger('dev'));
 //middlewares
 app.use(cors());
 app.use(express.json());
-app.use(passport.initialize());
+app.use(express.urlencoded({ extended: false }));
+app.use(multer({dest: path.join(__dirname, 'public/img/uploads')}).single('image'))
+/* app.use(passport.initialize());
+require('./auth') */
+
 
 //routes
 const clubsRouter = require('./routes/clubs');
@@ -32,11 +38,10 @@ app.get('/google/callback', passport.authenticate('google',
     {
         failureRedirect: '/login'
     }), (req, res) => {
-        res.redirect('/');
         res.end('logged in!')
     })
-
-
  */
+
+
 
 module.exports = app;

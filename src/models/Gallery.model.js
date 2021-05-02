@@ -1,16 +1,16 @@
 const { Schema, model } = require('mongoose');
 
-const SaleSchema = new Schema({
+const SaleSchema = new Schema({ 
     "name": {
         type: String,
         require: true,
         trim: true,
         unique: true
-    },
+    },  
     "desc": {
         type: String,
         require: true
-    },
+    }, 
     "date_init": {
         type: Date,
         require: true
@@ -20,10 +20,9 @@ const SaleSchema = new Schema({
         require: true
     }
 },
-    {
-        autoCreate: true,
-        timestamps: true
-    }
-);
+{
+    autoCreate: true,
+    timestamps: true
+});
 
-module.exports = model('SALES', SaleSchema);
+module.exports = model('EVENTS', SaleSchema);

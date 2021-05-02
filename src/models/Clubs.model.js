@@ -7,6 +7,12 @@ const ClubSchema = new Schema({
         trim: true,
         unique: true
     },
+    "background": {
+        type: String,
+        require: true,
+        trim: true,
+        unique: true
+    },
     "desc": {
         type: String,
         require: true,
@@ -17,6 +23,13 @@ const ClubSchema = new Schema({
         require: true,
         trim: true
     },
+    "products": [{
+        type: Schema.Types.ObjectId,
+        ref: 'PRODUCTS',
+        autopopulate: true,
+        unique: true,
+        trim: true
+    }],
     "sales": [{
         type: Schema.Types.ObjectId,
         ref: 'SALES',
