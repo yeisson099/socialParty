@@ -1,28 +1,13 @@
 const { Schema, model } = require('mongoose');
 
-const SaleSchema = new Schema({ 
-    "name": {
-        type: String,
-        require: true,
-        trim: true,
-        unique: true
-    },  
-    "desc": {
-        type: String,
-        require: true
-    }, 
-    "date_init": {
-        type: Date,
-        require: true
-    },
-    "date_end": {
-        type: Date,
-        require: true
-    }
+const GallerySchema = new Schema({ 
+    imageURL : String,
+    public_id : String,
+    club_id: String,
 },
 {
     autoCreate: true,
     timestamps: true
 });
 
-module.exports = model('EVENTS', SaleSchema);
+module.exports = model('PHOTOS', GallerySchema);

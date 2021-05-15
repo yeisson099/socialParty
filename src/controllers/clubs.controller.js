@@ -1,10 +1,12 @@
 const clubsCtrl = {};
 const ClubModel = require('../models/Clubs.model');
+const cloudinary = require('../cloud/cloudinary');
+const fs = require('fs-extra');
 
 
 //CRUD
 clubsCtrl.getClubs = async (req, res) => {
-    const clubs = await ClubModel.find()
+    const clubs = await ClubModel.find();
     res.json(clubs);
 };
 
@@ -14,18 +16,23 @@ clubsCtrl.getClub = async (req, res) => {
 };
 
 clubsCtrl.createClub = async (req, res) => {
-    const { name, desc, type, covid, state } = req.body;
+    const { name, desc, type, covid, state, cover, addres, musical_genre } = req.body;
+    const imgRes = await cloudinary.v2.uploader.upload(req.files[0].path);
+    await fs.unlink(req.files[0].path)
     const newClub = new ClubModel({
         name,
+        background: imgRes.url,
+        public_id: imgRes.public_id,
         desc,
         type,
         covid,
-        state
+        state,
+        cover, 
+        addres, 
+        musical_genre
     });
-    console.log(req.body)
-    console.log(newClub)
     const createClub = await newClub.save();
-    res.json(createClub);
+    res.send(createClub);
 };
 
 clubsCtrl.updateClub = async (req, res) => {
@@ -91,7 +98,11 @@ clubsCtrl.removeEvent = async (req, res) => {
 
 //filters
 clubsCtrl.getByType = async (req, res) => {
-    const clubs = await ClubModel.find()
+    const { type } = req.params;
+    console.log(type)
+    const clubs = await ClubModel.find({
+        type
+    });
     res.json(clubs);
 };
 
@@ -103,6 +114,15 @@ clubsCtrl.getByName = async (req, res) => {
     });
     res.json(clubs);
 };
+clubsCtrl.getBygenre = async (req, res) => {
+    const { genre } = req.params;
+    console.log(genre)
+    const clubs = await ClubModel.find({
+        musical_genre : genre
+    });
+    res.json(clubs);
+};
+
 
 
 

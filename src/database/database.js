@@ -3,7 +3,7 @@ const DB = require('./env.db');
 
 const URI = 'mongodb://localhost/socialParty';
 
-mongoose.connect(DB.database[0], {
+mongoose.connect(URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true, 
     useCreateIndex: true,
