@@ -6,8 +6,13 @@ const fs = require('fs-extra');
 
 //CRUD
 clubsCtrl.getClubs = async (req, res) => {
-    const clubs = await ClubModel.find();
-    res.json(clubs);
+    if (Object.keys(req.query).length > 0) {
+        const clubs = await clubsCtrl.filter(req.query);
+        res.json(clubs);
+    } else {
+        const clubs = await ClubModel.find();
+        res.json(clubs);
+    }
 };
 
 clubsCtrl.getClub = async (req, res) => {
@@ -27,8 +32,8 @@ clubsCtrl.createClub = async (req, res) => {
         type,
         covid,
         state,
-        cover, 
-        addres, 
+        cover,
+        addres,
         musical_genre
     });
     const createClub = await newClub.save();
@@ -96,31 +101,17 @@ clubsCtrl.removeEvent = async (req, res) => {
     res.json(addEvent);
 }
 
-//filters
-clubsCtrl.getByType = async (req, res) => {
-    const { type } = req.params;
-    console.log(type)
+//filter
+clubsCtrl.filter = async (params) => {
+    const { musical_genre, type, covid, cover, events } = params;
     const clubs = await ClubModel.find({
-        type
+        musical_genre: musical_genre,
+        type: type,
+        events: { $not: { $size: Number(events) } },
+        covid: covid,
+        cover: { $lte: Number(cover) }
     });
-    res.json(clubs);
-};
-
-clubsCtrl.getByName = async (req, res) => {
-    const { name } = req.params;
-    console.log(name)
-    const clubs = await ClubModel.find({
-        name
-    });
-    res.json(clubs);
-};
-clubsCtrl.getBygenre = async (req, res) => {
-    const { genre } = req.params;
-    console.log(genre)
-    const clubs = await ClubModel.find({
-        musical_genre : genre
-    });
-    res.json(clubs);
+    return clubs;
 };
 
 

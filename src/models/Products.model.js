@@ -4,6 +4,7 @@ const ProductSchema = new Schema({
     name: String,
     price: String,
     status: String,
+    type: String,
     imageURL: String,
     public_id: String,
     club_id: String,

@@ -10,7 +10,6 @@ const {
     getClub,
     addSale,
     removeSale,
-    getByName,
     addEvent,
     removeEvent
 } = require('../controllers/clubs.controller');
@@ -39,12 +38,5 @@ router.route('/assingEvent/:id')
 
 router.route('/removeEvent/:id')
 .put(removeEvent)
-
-//filters
-/* router.route('/getByType')
-    .get(getClubs)
- */
-router.route('/getByName/:name')
-    .get(getByName)
 
 module.exports = router;

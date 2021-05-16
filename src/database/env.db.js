@@ -1,8 +1,8 @@
-MONGODB_HOST     = "buurnejvits6h8p-mongodb.services.clever-cloud.com",
-MONGODB_DB       = "buurnejvits6h8p",
-MONGODB_USER     = "urndudnf5igxujvybidy",
+MONGODB_HOST     = "bw1qyxvshidsxhc-mongodb.services.clever-cloud.com",
+MONGODB_DB       = "bw1qyxvshidsxhc",
+MONGODB_USER     = "uusfpvbtu9oj7933gmfj",
 MONGODB_PORT     = "27017",
-MONGODB_PASSWORD = "dmdvD0kd1QHbhrpdQYkD"
+MONGODB_PASSWORD = "hVqRmYLfYZkQIMyYiM98"
 
 
 module.exports = {

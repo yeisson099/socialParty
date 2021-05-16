@@ -8,13 +8,11 @@ const ClubSchema = new Schema({
     },
     "background": {
         type: String,
-        trim: true,
-        unique: true
+        trim: true
     },
     "public_id": {
         type: String,
-        trim: true,
-        unique: true
+        trim: true
     },
     "desc": {
         type: String,
@@ -26,7 +24,12 @@ const ClubSchema = new Schema({
         require: true,
         trim: true
     },
-    "addres": {
+    "longitud": {
+        type: String,
+        require: true,
+        trim: true
+    },
+    "latitud": {
         type: String,
         require: true,
         trim: true
@@ -54,28 +57,24 @@ const ClubSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'PHOTOS',
         autopopulate: true,
-        unique: true,
         trim: true
     }],
     "products": [{
         type: Schema.Types.ObjectId,
         ref: 'PRODUCTS',
         autopopulate: true,
-        unique: true,
         trim: true
     }],
     "sales": [{
         type: Schema.Types.ObjectId,
         ref: 'SALES',
         autopopulate: true,
-        unique: true,
         trim: true
     }],
     "events": [{
         type: Schema.Types.ObjectId,
         ref: 'EVENTS',
         autopopulate: true,
-        unique: true,
         trim: true
     }]
 },
