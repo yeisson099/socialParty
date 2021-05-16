@@ -25,12 +25,12 @@ const ClubSchema = new Schema({
         trim: true
     },
     "longitud": {
-        type: Number,
+        type: String,
         require: true,
         trim: true
     },
     "latitud": {
-        type: Number,
+        type: String,
         require: true,
         trim: true
     },
