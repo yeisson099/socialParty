@@ -21,7 +21,7 @@ clubsCtrl.getClub = async (req, res) => {
 };
 
 clubsCtrl.createClub = async (req, res) => {
-    const { name, desc, type, covid, state, cover, addres, musical_genre } = req.body;
+    const { name, desc, type, covid, state, cover, longitud, latitud, musical_genre } = req.body;
     const imgRes = await cloudinary.v2.uploader.upload(req.files[0].path);
     await fs.unlink(req.files[0].path)
     const newClub = new ClubModel({
@@ -33,8 +33,9 @@ clubsCtrl.createClub = async (req, res) => {
         covid,
         state,
         cover,
-        addres,
-        musical_genre
+        longitud,
+        latitud,
+        musical_genre,
     });
     const createClub = await newClub.save();
     res.send(createClub);
