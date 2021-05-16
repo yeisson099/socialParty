@@ -2,10 +2,9 @@ const { Router } = require('express');
 const router = Router();
 
 //controllers
-const { addImages, getImages, removePhoto } = require('../controllers/gallery.controller');
+const { addImages, getImages, removePhoto, deletePhoto } = require('../controllers/gallery.controller');
 
 //middlewares
-//import auth from '../middlewares/auth';
 
 router.route('/')
     .get(getImages)
@@ -14,6 +13,7 @@ router.route('/')
 router.route('/:id')
     .post(addImages)
     .put(removePhoto)
+    .delete(deletePhoto)
 
 
 module.exports = router;
